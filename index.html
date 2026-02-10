@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSG MULTISERVICE</title>
+    <meta name="description" content="Discover the beauty of Sri Lanka with RSG Multiservice, from the breathtaking highlands of Ella to the genuine warmth of its hospitality.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-yellow': '#FDCB0A',
+                        'brand-blue': '#0072BC',
+                        'brand-blue-dark': '#005a8d',
+                        'brand-green': '#8DC63F',
+                        'brand-text': '#333333',
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                    scrollSnapType: {
+                        'x-mandatory': 'x mandatory',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        
+        html { scroll-behavior: smooth; }
+        #loading-bar { animation: load 1.5s ease-out forwards; }
+        .whatsapp-btn { animation: pulse 2s infinite; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .snap-x-mandatory { scroll-snap-type: x mandatory; }
+        .snap-start { scroll-snap-align: start; }
+
+        /* Hero Background Image Class */
+        .hero-bg {
+            background-color: #e0f7fa;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Scroll Animation Classes */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Thumbnail Active State */
+        .thumbnail-active {
+            border-color: #0072BC !important;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-white text-brand-text">
+
+<div id="loading-screen" class="fixed inset-0 bg-white flex flex-col justify-center items-center z-[9999] transition-all duration-500">
+    <img src="logo.png" alt="RSG Logo" class="w-24 h-24 mb-6" onerror="this.src='https://placehold.co/100x100/eee/333?text=Logo'">
+    <div class="w-1/2 max-w-xs h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div id="loading-bar" class="h-full bg-brand-blue rounded-full"></div>
+    </div>
+    <div class="text-brand-blue text-lg mt-4 font-medium">Caricamento RSG Multiservice...</div>
+</div>
+
+<header id="scroll-header" class="sticky top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="hidden md:flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+        <a href="#" onclick="closeServicePage()" class="transform hover:scale-110 transition-transform duration-300">
+            <img id="logo-img-header" src="https://placehold.co/64x64/eee/333?text=Logo" alt="RSG Logo" class="w-16 h-16">
+        </a>
+        
+        <div class="flex items-center gap-8">
+            <a href="#" onclick="closeServicePage()" class="font-medium text-brand-text hover:text-brand-blue transition-colors">Home</a>
+            <a href="#services" onclick="closeServicePage()" class="font-medium text-brand-text hover:text-brand-blue transition-colors">Servizi</a>
+            <a href="#process" onclick="closeServicePage()" class="font-medium text-brand-text hover:text-brand-blue transition-colors">Processo</a>
+            <a href="#testimonials" onclick="closeServicePage()" class="font-medium text-brand-text hover:text-brand-blue transition-colors">Recensioni</a>
+            <a href="#contact" onclick="closeServicePageAndScrollToContact()" class="font-medium text-brand-text hover:text-brand-blue transition-colors">Contatti</a>
+            <a href="admin.html" class="bg-brand-blue text-white font-semibold py-3 px-6 rounded-full hover:bg-brand-blue-dark transition-all duration-300 shadow-md hover:shadow-lg">
+                <i class="fas fa-user mr-2"></i>Accedi
+            </a>
+        </div>
+    </nav>
+
+    <div class="md:hidden">
+        <div class="bg-white grid grid-cols-3 items-center px-4 py-3">
+            <button id="mobile-menu-btn" class="text-2xl text-brand-text justify-self-start hover:text-brand-blue transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="#" onclick="closeServicePage()" class="justify-self-center">
+                <img id="logo-img-mobile" src="https://placehold.co/48x48/eee/333?text=Logo" alt="RSG Logo" class="w-12 h-12">
+            </a>
+            <div></div>
+        </div>
+
+        <div id="mobile-menu" class="hidden bg-white shadow-xl absolute w-full left-0 z-20">
+            <a href="#" onclick="closeServicePage()" class="block py-4 px-5 text-brand-text font-medium border-b hover:bg-brand-blue hover:text-white transition-all">Home</a>
+            <a href="#services" onclick="closeServicePage()" class="block py-4 px-5 text-brand-text font-medium border-b hover:bg-brand-blue hover:text-white transition-all">Servizi</a>
+            <a href="#process" onclick="closeServicePage()" class="block py-4 px-5 text-brand-text font-medium border-b hover:bg-brand-blue hover:text-white transition-all">Processo</a>
+            <a href="#testimonials" onclick="closeServicePage()" class="block py-4 px-5 text-brand-text font-medium border-b hover:bg-brand-blue hover:text-white transition-all">Recensioni</a>
+            <a href="#contact" onclick="closeServicePageAndScrollToContact()" class="block py-4 px-5 text-brand-text font-medium border-b hover:bg-brand-blue hover:text-white transition-all">Contatti</a>
+            <a href="admin.html" class="block py-4 px-5 text-brand-text font-medium hover:bg-brand-blue hover:text-white transition-all">Accedi</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div id="main-content">
+        
+        <section id="hero-section" class="relative py-24 lg:py-32 hero-bg text-white overflow-hidden flex items-center min-h-[70vh] md:min-h-screen">
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div> 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="max-w-3xl text-center mx-auto pt-20">
+                    <p id="hero-description" class="text-lg text-gray-200 leading-relaxed max-w-xl mb-10 mx-auto scroll-animate" style="transition-delay: 200ms;">
+                        Caricamento descrizione...
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center scroll-animate" style="transition-delay: 400ms;">
+                        <a href="#services" class="inline-flex items-center gap-2 bg-brand-blue text-white font-semibold py-4 px-8 rounded-full hover:bg-brand-blue-dark hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <span>Prenota un Servizio</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 scroll-animate">
+                    <div>
+                        <h2 class="text-4xl font-bold text-brand-text mb-4">Perché scegliere RSG Multiservizi</h2>
+                        <p class="text-gray-600 max-w-xl">Che tu abbia a che fare con una semplice soluzione o un progetto importante, i nostri esperti esperti sono pronti a gestire tutto.</p>
+                    </div>
+                    <div class="flex justify-start md:justify-end">
+                        <a href="#services" class="bg-brand-blue text-white font-semibold py-4 px-6 rounded-xl flex items-center gap-3 hover:bg-brand-blue-dark transition-all shadow-lg hover:shadow-xl">
+                            <span>Prenota un Servizio</span>
+                            <span class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center transform transition-transform duration-300 hover:scale-110">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white border-2 border-gray-200 rounded-3xl p-6 relative hover:border-brand-blue hover:shadow-xl transition-all duration-300 group scroll-animate" style="transition-delay: 200ms;">
+                        <div class="absolute -top-4 -right-4 w-10 h-10 rounded-full flex items-center justify-center bg-white border-2 border-gray-200 group-hover:border-brand-blue transition-colors">
+                            <i class="fas fa-arrow-right text-gray-400 group-hover:text-brand-blue transition-colors"></i>
+                        </div>
+                        <div class="flex gap-5 items-start">
+                            <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center">
+                                <i class="fas fa-tools text-brand-blue text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-text mb-2">Affidabile e veloce</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">È un fatto consolidato da tempo che il lettore sarà distratto dal contenuto leggibile.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border-2 border-brand-blue rounded-3xl p-6 relative shadow-2xl transform md:scale-105 scroll-animate" style="transition-delay: 300ms;">
+                        <div class="absolute -top-4 -right-4 w-10 h-10 rounded-full flex items-center justify-center bg-brand-blue">
+                            <i class="fas fa-arrow-right text-white"></i>
+                        </div>
+                        <div class="flex gap-5 items-start">
+                            <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center">
+                                <i class="fas fa-user-tie text-brand-blue text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-text mb-2">Professionisti esperti</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">È un fatto consolidato da tempo che il lettore sarà distratto dal contenuto leggibile.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border-2 border-gray-200 rounded-3xl p-6 relative hover:border-brand-blue hover:shadow-xl transition-all duration-300 group scroll-animate" style="transition-delay: 400ms;">
+                        <div class="absolute -top-4 -right-4 w-10 h-10 rounded-full flex items-center justify-center bg-white border-2 border-gray-200 group-hover:border-brand-blue transition-colors">
+                            <i class="fas fa-arrow-right text-gray-400 group-hover:text-brand-blue transition-colors"></i>
+                        </div>
+                        <div class="flex gap-5 items-start">
+                            <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-yellow-50 flex items-center justify-center">
+                                <i class="fas fa-hand-holding-usd text-brand-yellow text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-text mb-2">Prezzi trasparenti</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">È un fatto consolidato da tempo che il lettore sarà distratto dal contenuto leggibile.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 bg-gray-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 scroll-animate">
+                    <div>
+                        <h2 class="text-4xl font-bold text-brand-text">Esplora i nostri servizi premium</h2>
+                        <p class="text-gray-600 mt-3 text-lg max-w-2xl">Scopri i nostri servizi più popolari, gestiti professionalmente dal nostro team di esperti.</p>
+                    </div>
+                    <div class="hidden md:flex gap-3 flex-shrink-0 mt-4 md:mt-0">
+                        <button class="w-12 h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center hover:bg-brand-blue-dark transition-all">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="services-grid" class="flex gap-6 overflow-x-auto pb-8 no-scrollbar scroll-animate" style="transition-delay: 200ms;">
+                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex-shrink-0 w-80">
+                        <div class="w-full h-48 bg-gray-200 animate-pulse relative">
+                            <div class="absolute top-4 right-4 h-7 w-16 bg-gray-300 rounded-full"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="h-6 bg-gray-200 rounded w-1/2 animate-pulse mb-2"></div>
+                            <div class="h-4 bg-gray-100 rounded w-full animate-pulse mb-6"></div>
+                            <div class="flex justify-between items-center">
+                                <div class="h-8 bg-gray-200 rounded w-1/4 animate-pulse"></div>
+                                <div class="h-10 bg-gray-200 rounded-full w-1/2 animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-20 bg-white relative overflow-hidden">
+            <div class="absolute top-10 right-10 opacity-20 transform rotate-12">
+                <img src="https://img.icons8.com/plasticine/100/pliers.png" alt="Pliers" class="w-24 h-24">
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-4xl font-bold text-brand-text mb-2">Il nostro processo di lavoro</h2>
+                    <p class="text-gray-600 text-base max-w-2xl mx-auto">Crediamo nel rendere la tua esperienza semplice e senza problemi. Ecco come funziona il nostro processo di servizio a domicilio.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-lg hover:border-brand-blue transition-all duration-300 scroll-animate" style="transition-delay: 200ms;">
+                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                            <img id="process-icon-1" src="https://placehold.co/80x80/eee/333?text=Icon" alt="Book Service" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-semibold text-brand-text mb-2">Prenota il tuo servizio</h3>
+                        <p class="text-gray-600 text-sm leading-snug mb-4">Pianifica il tuo intervento online o tramite una semplice chiamata.</p>
+                        <a href="#services" class="text-brand-blue text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                            Read More <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-lg hover:border-brand-blue transition-all duration-300 scroll-animate" style="transition-delay: 300ms;">
+                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                            <img id="process-icon-2" src="https://placehold.co/80x80/eee/333?text=Icon" alt="Get Estimate" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-semibold text-brand-text mb-2">Ricevi un Preventivo</h3>
+                        <p class="text-gray-600 text-sm leading-snug mb-4">Forniamo preventivi rapidi e trasparenti per le tue necessità.</p>
+                        <a href="#contact" class="text-brand-blue text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                            Read More <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-white border-2 border-brand-blue rounded-xl p-6 text-center shadow-lg transform md:-translate-y-2 hover:translate-y-0 transition-all duration-300 scroll-animate" style="transition-delay: 400ms;">
+                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                            <img id="process-icon-3" src="https://placehold.co/80x80/eee/333?text=Icon" alt="Professional Work" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-semibold text-brand-text mb-2">Lavoro Professionale</h3>
+                        <p class="text-gray-600 text-sm leading-snug mb-4">I nostri esperti gestiranno il tuo progetto con la massima cura.</p>
+                        <a href="#process" class="text-brand-blue text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                            Read More <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-lg hover:border-brand-blue transition-all duration-300 scroll-animate" style="transition-delay: 500ms;">
+                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                            <img id="process-icon-4" src="https://placehold.co/80x80/eee/333?text=Icon" alt="Quality Inspection" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-lg font-semibold text-brand-text mb-2">Controllo Qualità</h3>
+                        <p class="text-gray-600 text-sm leading-snug mb-4">Ci assicuriamo che tutto sia perfetto prima di concludere il lavoro.</p>
+                        <a href="#testimonials" class="text-brand-blue text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                            Read More <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-4xl font-bold text-brand-text mb-4">I Nostri Progetti Recenti</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Questi sono solo alcuni dei lavori completati con successo; realizziamo molti altri progetti su misura.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 scroll-animate" style="transition-delay: 200ms;">
+                    <div class="col-span-1 row-span-2 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-1" src="https://placehold.co/400x600/eee/333?text=Project" alt="Project 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 text-white">
+                                <h4 class="font-bold text-lg">Lavoro Recente</h4>
+                                <p class="text-sm text-gray-200">Eccellenza RSG</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-2" src="https://placehold.co/400x300/eee/333?text=Project" alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-1 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-3" src="https://placehold.co/400x300/eee/333?text=Project" alt="Project 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-1 row-span-2 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-4" src="https://placehold.co/400x600/eee/333?text=Project" alt="Project 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-1 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-5" src="https://placehold.co/400x300/eee/333?text=Project" alt="Project 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-1 relative group overflow-hidden rounded-3xl">
+                        <img id="project-img-6" src="https://placehold.co/400x300/eee/333?text=Project" alt="Project 6" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-4xl font-bold text-brand-text mb-4">Cosa Dicono i Clienti?</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Ecco i feedback raccolti in oltre 5 anni di attività; recensioni eccezionali che ci rendono orgogliosi.</p>
+                </div>
+                
+                <div id="testimonials-slider" class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 no-scrollbar snap-x-mandatory scroll-animate" style="transition-delay: 200ms;">
+                    <div class="bg-white border-2 border-gray-100 rounded-3xl p-8 w-[90%] md:w-auto flex-shrink-0 snap-start">
+                        <div class="flex gap-1 text-brand-yellow mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <div class="h-4 bg-gray-200 rounded w-full animate-pulse mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full animate-pulse mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-1/2 animate-pulse mb-6"></div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-gray-200 animate-pulse"></div>
+                            <div>
+                                <div class="h-5 bg-gray-200 rounded w-24 animate-pulse mb-2"></div>
+                                <div class="h-4 bg-gray-100 rounded w-32 animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="subscribe" class="py-20 bg-gradient-to-r from-brand-blue to-brand-blue-dark relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-yellow rounded-full blur-3xl"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 scroll-animate">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Iscriviti per Sconti Esclusivi</h2>
+                <p class="text-lg text-blue-100 max-w-2xl mx-auto mb-10">
+                    Unisciti alla nostra newsletter per ricevere le ultime novità, offerte speciali e sconti esclusivi sui nostri servizi.
+                </p>
+                <form class="max-w-lg mx-auto flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email address" required class="flex-1 px-6 py-4 rounded-full focus:outline-none focus:ring-4 focus:ring-brand-yellow/50 transition-all">
+                    <button type="submit" class="bg-brand-yellow text-brand-blue font-bold py-4 px-8 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                        Iscriviti Ora
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="facebook" class="py-20 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-3xl font-bold text-brand-text mb-4">Dal Nostro Facebook</h2>
+                    <p class="text-gray-600">Resta aggiornato con i nostri ultimi post e offerte</p>
+                </div>
+                
+                <div id="facebook-posts-slider" class="flex overflow-x-auto md:grid md:grid-cols-3 gap-4 md:gap-8 no-scrollbar snap-x-mandatory scroll-animate" style="transition-delay: 200ms;">
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    
+                    <div class="scroll-animate" style="transition-delay: 200ms;">
+                        <div class="mb-8">
+                            <span class="inline-block bg-blue-50 text-brand-blue px-4 py-2 rounded-full text-sm font-semibold mb-4">CONTATTACI</span>
+                            <h2 class="text-4xl font-bold text-brand-text mb-4">Mettiti in Contatto</h2>
+                            <p class="text-gray-600">Siamo qui per aiutarti! Come possiamo esserti utili?</p>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Il Tuo Nome</label>
+                                <input type="text" id="name" placeholder="Enter your name" required class="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-brand-blue transition-all">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Indirizzo Email</label>
+                                <input type="email" id="email" placeholder="Enter your email" required class="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-brand-blue transition-all">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Il Tuo Messaggio</label>
+                                <textarea id="message" rows="5" placeholder="Enter your message" required class="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-brand-blue transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand-blue text-white font-bold py-4 px-8 rounded-2xl hover:bg-brand-blue-dark hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-blue to-brand-blue-dark rounded-3xl p-10 text-white shadow-2xl relative overflow-hidden scroll-animate" style="transition-delay: 300ms;">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                        <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-yellow/10 rounded-full blur-3xl"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6">Informazioni di Contatto</h3>
+                            <p class="text-blue-100 mb-10 leading-relaxed">Puoi raggiungerci direttamente attraverso questi canali. Non vediamo l'ora di sentirti!</p>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-5 p-5 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-colors duration-300">
+                                    <div class="w-14 h-14 bg-brand-yellow rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i class="fas fa-map-marker-alt text-brand-blue text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold mb-1">La Nostra Sede</p>
+                                        <p class="text-blue-100">Via Magellano 11/B Verona,<br>Verona,Italy</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-5 p-5 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-colors duration-300">
+                                    <div class="w-14 h-14 bg-brand-yellow rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i class="fas fa-phone text-brand-blue text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold mb-1">Telefono</p>
+                                        <a href="tel:+94123456789" class="text-blue-100 hover:text-brand-yellow transition-colors">+39 351 117 1687</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-5 p-5 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-colors duration-300">
+                                    <div class="w-14 h-14 bg-brand-yellow rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i class="fas fa-envelope text-brand-blue text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold mb-1">Indirizzo Email</p>
+                                        <a href="mailto:info@rsgmultiservice.com" class="text-blue-100 hover:text-brand-yellow transition-colors">postmaster@rsgmultiservice.com </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-10 pt-10 border-t border-white/20">
+                                <p class="font-semibold mb-4">Seguici sui Social</p>
+                                <div class="flex gap-4">
+                                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-brand-yellow hover:text-brand-blue transition-all duration-300"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-brand-yellow hover:text-brand-blue transition-all duration-300"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-brand-yellow hover:text-brand-blue transition-all duration-300"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-brand-yellow hover:text-brand-blue transition-all duration-300"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="service-full-page" class="hidden bg-white min-h-screen pb-20 relative z-[60]">
+        
+        <button onclick="closeServicePage()" class="fixed top-6 left-6 z-50 bg-white/90 backdrop-blur text-brand-text w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    
+        <div id="page-banner-container" class="relative w-full h-[500px] bg-gray-800 flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed">
+            <div class="absolute inset-0 bg-black/40"></div>
+            
+            <div class="relative z-10 border-[5px] border-white px-10 py-6 max-w-4xl text-center mx-4">
+                <h1 id="page-service-name" class="text-4xl md:text-6xl font-bold text-white uppercase tracking-wide drop-shadow-lg">
+                    Nome Servizio
+                </h1>
+            </div>
+        </div>
+    
+        <div class="bg-white py-12 relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b border-gray-100 pb-8">
+                    <div>
+                         <span class="text-gray-500 uppercase tracking-wider text-sm font-semibold">Starting Price</span>
+                         <div id="page-service-price" class="text-3xl md:text-4xl text-brand-blue font-bold mt-1"></div>
+                    </div>
+                    <a href="#contact" onclick="closeServicePageAndScrollToContact()" class="mt-4 md:mt-0 bg-brand-yellow text-brand-text font-bold py-4 px-10 rounded-full hover:bg-brand-text hover:text-white transition-all shadow-lg transform hover:-translate-y-1 cursor-pointer">
+                        Prenota Ora
+                    </a>
+                </div>
+    
+                <div class="prose max-w-none text-gray-600 mb-12">
+                    <h3 class="text-2xl font-bold text-brand-text mb-6">Service Details</h3>
+                    <p id="page-service-description" class="text-lg leading-relaxed whitespace-pre-line text-justify"></p>
+                </div>
+    
+                <div id="page-gallery-section" class="hidden">
+                    <h3 class="text-2xl font-bold text-brand-text mb-6">Gallery</h3>
+                    <div id="page-main-image-container" class="mb-4 rounded-2xl overflow-hidden shadow-lg h-[400px]">
+                        <img id="page-main-image" src="" class="w-full h-full object-cover">
+                    </div>
+                    <div id="page-thumbnails" class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+                        </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-20 pb-10 hidden md:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            
+            <div class="lg:col-span-2">
+                <img src="logo.png" src="https://placehold.co/80x80/333/fff?text=Logo" alt="RSG Logo" class="w-20 h-20 mb-6">
+                <h3 class="text-2xl font-bold mb-4">RSG MULTISERVICE</h3>
+                <p class="text-gray-400 leading-relaxed mb-6">Pulizie professionali e manutenzione per ogni esigenza business services.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-blue transition-all duration-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-blue transition-all duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-blue transition-all duration-300"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-brand-blue transition-all duration-300"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" onclick="closeServicePage()" class="text-gray-400 hover:text-brand-yellow hover:pl-2 transition-all duration-300 inline-block">Home</a></li>
+                    <li><a href="#services" onclick="closeServicePage()" class="text-gray-400 hover:text-brand-yellow hover:pl-2 transition-all duration-300 inline-block">I nostri servizi</a></li>
+                    <li><a href="#process" onclick="closeServicePage()" class="text-gray-400 hover:text-brand-yellow hover:pl-2 transition-all duration-300 inline-block">Come funziona</a></li>
+                    <li><a href="#testimonials" onclick="closeServicePage()" class="text-gray-400 hover:text-brand-yellow hover:pl-2 transition-all duration-300 inline-block">Testimonianze</a></li>
+                    <li><a href="#contact" onclick="closeServicePageAndScrollToContact()" class="text-gray-400 hover:text-brand-yellow hover:pl-2 transition-all duration-300 inline-block">Contattaci</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xl font-bold mb-6">Contatti</h4>
+                <div class="space-y-4">
+                    <p class="text-gray-400 flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt mt-1 text-brand-yellow"></i>
+                        <span>Via Magellano 11/B Verona,<br>Verona, Italy</span>
+                    </p>
+                    <p class="text-gray-400 flex items-center gap-3">
+                        <i class="fas fa-phone text-brand-yellow"></i>
+                        <a href="tel:+94123456789" class="hover:text-brand-yellow transition-colors">+39 351 117 1687</a>
+                    </p>
+                    <p class="text-gray-400 flex items-center gap-3">
+                        <i class="fas fa-envelope text-brand-yellow"></i>
+                        <a href="mailto:info@rsgmultiservice.com" class="hover:text-brand-yellow transition-colors">postmaster@rsgmultiservice.com </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700 pt-8 text-center">
+            <p class="text-gray-400">&copy;2024 RSG MULTISERVICE. Tutti i diritti riservati. Sviluppato con <span class="text-red-500">❤️</span> in Sri Lanka.</p>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/393511171687" target="_blank" class="whatsapp-btn fixed bottom-24 right-5 md:bottom-6 md:right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-300">
+    <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-2xl border-t-2 border-gray-100 z-40">
+    <div class="grid grid-cols-4 h-20">
+        <a href="#" onclick="closeServicePage()" class="flex flex-col items-center justify-center text-brand-blue border-t-4 border-brand-blue transition-colors">
+            <i class="fas fa-home text-xl mb-1"></i>
+            <span class="text-xs font-medium">Home</span>
+        </a>
+        <a href="#services" onclick="closeServicePage()" class="flex flex-col items-center justify-center text-gray-600 hover:text-brand-blue border-t-4 border-transparent hover:border-brand-blue transition-all">
+            <i class="fas fa-concierge-bell text-xl mb-1"></i>
+            <span class="text-xs font-medium">Servizi</span>
+        </a>
+        <a href="#contact" onclick="closeServicePageAndScrollToContact()" class="flex flex-col items-center justify-center text-gray-600 hover:text-brand-blue border-t-4 border-transparent hover:border-brand-blue transition-all">
+            <i class="fas fa-calendar-check text-xl mb-1"></i>
+            <span class="text-xs font-medium">Prenota</span>
+        </a>
+        <a href="admin.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-brand-blue border-t-4 border-transparent hover:border-brand-blue transition-all">
+            <i class="fas fa-user text-xl mb-1"></i>
+            <span class="text-xs font-medium">Account</span>
+        </a>
+    </div>
+</nav>
+
+<script>
+    // Loading Screen
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loading-screen').classList.add('opacity-0', 'invisible');
+        }, 1500);
+    });
+
+    // Mobile Menu
+    function initMobileMenu() {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (menuBtn && menu) {
+            menuBtn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+    }
+
+    // Mobile Auto-slider function
+    function initAutoSlider(containerId, interval = 3000) {
+        const slider = document.getElementById(containerId);
+        if (!slider) return;
+
+        let sliderInterval;
+
+        function startSlider() {
+            sliderInterval = setInterval(() => {
+                if (window.innerWidth < 768) {
+                    const firstCard = slider.querySelector(':scope > div, :scope > a');
+                    if (!firstCard) return;
+
+                    const cardWidth = firstCard.offsetWidth;
+                    const gap = parseInt(window.getComputedStyle(slider).gap) || 0;
+                    
+                    let nextScroll = slider.scrollLeft + cardWidth + gap;
+
+                    if (slider.scrollLeft + slider.clientWidth + 2 >= slider.scrollWidth) {
+                        slider.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        slider.scrollTo({ left: nextScroll, behavior: 'smooth' });
+                    }
+                }
+            }, interval);
+        }
+
+        function stopSlider() {
+            clearInterval(sliderInterval);
+        }
+
+        startSlider();
+        slider.addEventListener('touchstart', stopSlider, { passive: true });
+        slider.addEventListener('touchend', startSlider, { passive: true });
+    }
+
+    // Scroll Animation Function
+    function initScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); 
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    // Initialize UI Scripts
+    document.addEventListener("DOMContentLoaded", () => {
+        initMobileMenu();
+        initScrollAnimations(); 
+        initAutoSlider('testimonials-slider', 3000); 
+        initAutoSlider('facebook-posts-slider', 3500);
+    });
+</script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+    import { getFirestore, collection, getDocs, doc, getDoc, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBATufdDD6dJxPB264czDqIpvlKs6U1Bo0",
+  authDomain: "rsg-new-wed.firebaseapp.com",
+  projectId: "rsg-new-wed",
+  storageBucket: "rsg-new-wed.firebasestorage.app",
+  messagingSenderId: "790179723531",
+  appId: "1:790179723531:web:825aef4fc725a5f89c0a0e",
+  measurementId: "G-SQBCE6JSFT"
+};
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    
+    // Services Load Function
+    async function loadServices() {
+        const servicesGrid = document.getElementById('services-grid');
+        if (!servicesGrid) return;
+
+        try {
+            const servicesCollection = collection(db, "services");
+            const q = query(servicesCollection, orderBy("name"));
+            const querySnapshot = await getDocs(q);
+            
+            if (querySnapshot.empty) {
+                servicesGrid.innerHTML = '<p class="text-gray-600 col-span-full text-center text-lg">No services found. Please check back later.</p>';
+                return;
+            }
+            
+            servicesGrid.innerHTML = ''; // Clear skeletons
+            querySnapshot.forEach((doc) => {
+                const service = doc.data();
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl shadow-lg overflow-hidden flex-shrink-0 w-80 group";
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${service.imageUrl || 'https://placehold.co/400x200/eee/333?text=Service'}" alt="${service.name}" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x200/eee/333?text=Image+Error'">
+                        <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/20">
+                            <i class="fas fa-star text-brand-yellow text-sm"></i>
+                            <span class="text-sm font-bold text-white">4.8</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-text mb-1">${service.name}</h3>
+                        <p class="text-gray-500 text-sm mb-5 h-10 line-clamp-2">${service.description}</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-brand-blue font-bold text-3xl">${service.price || '49'}</div>
+                            <button data-service-id="${doc.id}" class="book-service-btn bg-brand-blue text-white font-semibold py-3 px-6 rounded-full hover:bg-brand-blue-dark transition-all duration-300 text-sm">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                `;
+                servicesGrid.appendChild(card);
+            });
+        } catch (error) {
+            console.error("Error loading services:", error);
+            servicesGrid.innerHTML = '<p class="text-red-500 col-span-full text-center text-lg">Could not load services.</p>';
+        }
+    }
+
+    // Timestamp Formatter
+    function formatFbTimestamp(date) {
+        if (!date) return 'Just now';
+        const now = new Date();
+        const secondsAgo = Math.round((now.getTime() - date.getTime()) / 1000);
+        if (secondsAgo < 60) return `${secondsAgo}s ago`;
+        const minutesAgo = Math.floor(secondsAgo / 60);
+        if (minutesAgo < 60) return `${minutesAgo}m ago`;
+        const hoursAgo = Math.floor(minutesAgo / 60);
+        if (hoursAgo < 24) return `${hoursAgo}h ago`;
+        return date.toLocaleString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    // Facebook Posts Load Function
+    async function loadFacebookPosts() {
+        const fbSlider = document.getElementById('facebook-posts-slider');
+        if (!fbSlider) return;
+
+        try {
+            const postsCollection = collection(db, "facebookPosts");
+            const q = query(postsCollection, orderBy("timestamp", "desc"), limit(6));
+            const querySnapshot = await getDocs(q);
+            
+            if (querySnapshot.empty) {
+                fbSlider.innerHTML = '<p class="text-gray-600 col-span-full text-center text-lg">No Facebook posts found.</p>';
+                return;
+            }
+            
+            fbSlider.innerHTML = ''; 
+            querySnapshot.forEach((doc) => {
+                const post = doc.data();
+                const card = document.createElement('a');
+                card.href = post.postUrl || '#';
+                card.target = "_blank";
+                card.rel = "noopener noreferrer";
+                card.className = "bg-white border-2 border-gray-100 rounded-2xl overflow-hidden w-[90%] md:w-auto flex-shrink-0 snap-start group transition-all duration-300 hover:border-brand-blue hover:shadow-xl flex flex-col";
+                const postDate = post.timestamp ? formatFbTimestamp(post.timestamp.toDate()) : 'Just now';
+                card.innerHTML = `
+                    <div class="p-4 flex items-center gap-3">
+                        <img id="fb-post-logo-${doc.id}" src="https://placehold.co/40x40/eee/333?text=Logo" alt="RSG Logo" class="w-10 h-10 rounded-full border border-gray-100">
+                        <div>
+                            <h4 class="font-bold text-brand-text group-hover:text-brand-blue">RSG Multiservice</h4>
+                            <p class="text-xs text-gray-500">${postDate} · <i class="fas fa-globe-americas text-xs"></i></p>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-3">
+                        <p class="text-gray-700 text-sm">${post.postText || 'Click to see our latest post...'}</p>
+                    </div>
+                    <div class="w-full h-56 overflow-hidden mt-auto">
+                        <img src="${post.imageUrl || 'https://placehold.co/400x200/0072BC/white?text=RSG+Post'}" alt="Facebook Post Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x200/0072BC/white?text=RSG+Post'">
+                    </div>
+                    <div class="p-3 flex justify-around border-t border-gray-100 bg-gray-50/50">
+                        <div class="flex items-center gap-2 text-gray-600 font-medium text-sm hover:text-brand-blue cursor-pointer"><i class="far fa-thumbs-up"></i> Like</div>
+                        <div class="flex items-center gap-2 text-gray-600 font-medium text-sm hover:text-brand-blue cursor-pointer"><i class="far fa-comment-alt"></i> Comment</div>
+                        <div class="flex items-center gap-2 text-gray-600 font-medium text-sm hover:text-brand-blue cursor-pointer"><i class="far fa-share-square"></i> Share</div>
+                    </div>
+                `;
+                fbSlider.appendChild(card);
+            });
+        } catch (error) {
+            console.error("Error loading Facebook posts:", error);
+            fbSlider.innerHTML = '<p class="text-red-500 col-span-full text-center text-lg">Could not load Facebook posts.</p>';
+        }
+    }
+
+    // Load Site Content
+    async function loadSiteContent() {
+        const siteContentRef = doc(db, 'siteContent', 'mainPage');
+        try {
+            const docSnap = await getDoc(siteContentRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+
+                // Logos
+                if (data.logoUrl) {
+                    const logoHeader = document.getElementById('logo-img-header');
+                    const logoMobile = document.getElementById('logo-img-mobile');
+                    const logoFooter = document.getElementById('logo-img-footer');
+                    if (logoHeader) logoHeader.src = data.logoUrl;
+                    if (logoMobile) logoMobile.src = data.logoUrl;
+                    if (logoFooter) logoFooter.src = data.logoUrl;
+                    
+                    // FB Post Logos
+                    const fbLogos = document.querySelectorAll('[id^="fb-post-logo-"]');
+                    fbLogos.forEach(logo => logo.src = data.logoUrl);
+                }
+
+                // Hero
+                if (data.heroBackgroundUrl) {
+                    const heroSection = document.getElementById('hero-section');
+                    if (heroSection) heroSection.style.backgroundImage = `url('${data.heroBackgroundUrl}')`;
+                }
+                if (data.heroDescription) {
+                    const heroDesc = document.getElementById('hero-description');
+                    if (heroDesc) heroDesc.textContent = data.heroDescription;
+                }
+
+                // Icons
+                if (data.processIcons && data.processIcons.length >= 4) {
+                    for (let i = 1; i <= 4; i++) {
+                        const iconImg = document.getElementById(`process-icon-${i}`);
+                        if (iconImg) iconImg.src = data.processIcons[i-1];
+                    }
+                }
+
+                // Projects
+                if (data.recentProjects && data.recentProjects.length >= 6) {
+                    for (let i = 1; i <= 6; i++) {
+                        const projectImg = document.getElementById(`project-img-${i}`);
+                        if (projectImg) projectImg.src = data.recentProjects[i-1];
+                    }
+                }
+
+                // Testimonials
+                const testimonialSlider = document.getElementById('testimonials-slider');
+                if (data.testimonials && testimonialSlider) {
+                    testimonialSlider.innerHTML = ''; 
+                    data.testimonials.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = "bg-white border-2 border-gray-100 rounded-3xl p-8 hover:border-brand-blue hover:shadow-xl transition-all duration-300 w-[90%] md:w-auto flex-shrink-0 snap-start";
+                        
+                        let stars = '';
+                        const rating = item.rating || 5;
+                        for(let i=0; i<5; i++) {
+                            if (i < Math.floor(rating)) {
+                                stars += '<i class="fas fa-star"></i>';
+                            } else if (i < rating) {
+                                stars += '<i class="fas fa-star-half-alt"></i>';
+                            } else {
+                                stars += '<i class="far fa-star"></i>'; 
+                            }
+                        }
+
+                        card.innerHTML = `
+                            <div class="flex gap-1 text-brand-yellow mb-4">${stars}</div>
+                            <p class="text-gray-600 leading-relaxed mb-6">"${item.text}"</p>
+                            <div class="flex items-center gap-4">
+                                <img src="${item.imageUrl || 'https://placehold.co/60/ccc/333?text=User'}" alt="Client" class="w-14 h-14 rounded-full" onerror="this.src='https://placehold.co/60/ccc/333?text=User'">
+                                <div>
+                                    <h4 class="font-bold text-brand-text">${item.name}</h4>
+                                    <p class="text-sm text-gray-500">${item.role}</p>
+                                </div>
+                            </div>
+                        `;
+                        testimonialSlider.appendChild(card);
+                    });
+                }
+            }
+        } catch (error) {
+            console.error("Error loading site content:", error);
+        }
+    }
+
+
+    // --- UPDATED FULL PAGE SERVICE LOGIC (WITH BANNER SUPPORT) ---
+
+    const mainContent = document.getElementById('main-content');
+    const servicePage = document.getElementById('service-full-page');
+    
+    // Function to open the full service page
+    window.openServicePage = async function(serviceId) { // Added to window for access
+        if (!serviceId) return;
+
+        // 1. Toggle Visibility
+        mainContent.classList.add('hidden');
+        servicePage.classList.remove('hidden');
+        window.scrollTo(0, 0);
+
+        // 2. Set Loading State
+        document.getElementById('page-service-name').textContent = 'Loading...';
+        document.getElementById('page-service-price').textContent = '';
+        document.getElementById('page-service-description').textContent = 'Please wait...';
+        
+        // Reset Banner
+        const bannerContainer = document.getElementById('page-banner-container');
+        bannerContainer.style.backgroundImage = 'none';
+        bannerContainer.classList.add('bg-gray-800'); // Fallback color
+
+        document.getElementById('page-thumbnails').innerHTML = '';
+        document.getElementById('page-gallery-section').classList.add('hidden');
+
+        try {
+            const serviceRef = doc(db, 'services', serviceId);
+            const docSnap = await getDoc(serviceRef);
+
+            if (docSnap.exists()) {
+                const service = docSnap.data();
+                
+                // Fill Text Data
+                document.getElementById('page-service-name').textContent = service.name;
+                document.getElementById('page-service-price').textContent = service.price;
+                document.getElementById('page-service-description').textContent = service.detailedDescription || service.description;
+
+                // *** SET HERO BANNER ***
+                if (service.bannerUrl) {
+                    bannerContainer.style.backgroundImage = `url('${service.bannerUrl}')`;
+                } else if (service.imageUrl) {
+                    // Fallback to main image if no banner exists
+                    bannerContainer.style.backgroundImage = `url('${service.imageUrl}')`;
+                }
+
+                // Handle Gallery (Slider Images)
+                const allImages = [service.imageUrl, ...(service.sliderImages || [])].filter(Boolean);
+                const gallerySection = document.getElementById('page-gallery-section');
+                
+                if (allImages.length > 0) {
+                    gallerySection.classList.remove('hidden');
+                    const mainImg = document.getElementById('page-main-image');
+                    const thumbnailsDiv = document.getElementById('page-thumbnails');
+                    
+                    mainImg.src = allImages[0]; 
+                    
+                    allImages.forEach((imgUrl, index) => {
+                        const thumb = document.createElement('img');
+                        thumb.src = imgUrl;
+                        thumb.className = `w-24 h-24 object-cover rounded-lg cursor-pointer border-2 transition-all hover:scale-105 ${index === 0 ? 'border-brand-blue' : 'border-transparent'}`;
+                        
+                        thumb.addEventListener('click', () => {
+                            mainImg.src = imgUrl;
+                            thumbnailsDiv.querySelectorAll('img').forEach(t => {
+                                t.classList.remove('border-brand-blue');
+                                t.classList.add('border-transparent');
+                            });
+                            thumb.classList.remove('border-transparent');
+                            thumb.classList.add('border-brand-blue');
+                        });
+                        
+                        thumbnailsDiv.appendChild(thumb);
+                    });
+                }
+
+            } else {
+                console.warn("No such service document!");
+                window.closeServicePage();
+            }
+        } catch (error) {
+            console.error("Error getting service details:", error);
+            window.closeServicePage();
+        }
+    }
+
+    // Function to close page and return home
+    window.closeServicePage = function() {
+        servicePage.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    // Function to go to contact from service page
+    window.closeServicePageAndScrollToContact = function() {
+        servicePage.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        
+        setTimeout(() => {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    // Event Delegation for "Book Now" buttons
+    document.addEventListener('click', (e) => {
+        const bookBtn = e.target.closest('.book-service-btn');
+        if (bookBtn) {
+            const serviceId = bookBtn.dataset.serviceId;
+            window.openServicePage(serviceId);
+        }
+    });
+
+    // Call loads
+    document.addEventListener("DOMContentLoaded", () => {
+        loadSiteContent();
+        loadServices();
+        loadFacebookPosts();
+    });
+</script>
+</body>
+</html>
