@@ -809,7 +809,7 @@ const firebaseConfig = {
                 const postDate = post.timestamp ? formatFbTimestamp(post.timestamp.toDate()) : 'Just now';
                 card.innerHTML = `
                     <div class="p-4 flex items-center gap-3">
-                        <img id="fb-post-logo-${doc.id}" src="https://placehold.co/40x40/eee/333?text=Logo" alt="RSG Logo" class="w-10 h-10 rounded-full border border-gray-100">
+                        <img id="fb-post-logo-${doc.id}" src=logo.png alt="RSG Logo" class="w-10 h-10 rounded-full border border-gray-100">
                         <div>
                             <h4 class="font-bold text-brand-text group-hover:text-brand-blue">RSG Multiservice</h4>
                             <p class="text-xs text-gray-500">${postDate} · <i class="fas fa-globe-americas text-xs"></i></p>
