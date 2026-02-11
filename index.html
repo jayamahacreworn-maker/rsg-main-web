@@ -746,10 +746,7 @@ const firebaseConfig = {
                 card.innerHTML = `
                     <div class="relative">
                         <img src="${service.imageUrl || 'https://placehold.co/400x200/eee/333?text=Service'}" alt="${service.name}" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x200/eee/333?text=Image+Error'">
-                        <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/20">
-                            <i class="fas fa-star text-brand-yellow text-sm"></i>
-                            <span class="text-sm font-bold text-white">4.8</span>
-                        </div>
+                        
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-brand-text mb-1">${service.name}</h3>
