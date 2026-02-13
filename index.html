@@ -200,13 +200,13 @@
                         <p class="text-gray-600 mt-3 text-lg max-w-2xl">Scopri i nostri servizi più popolari, gestiti professionalmente dal nostro team di esperti.</p>
                     </div>
                     <div class="hidden md:flex gap-3 flex-shrink-0 mt-4 md:mt-0">
-                        <button class="w-12 h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center hover:bg-brand-blue-dark transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+    <button id="service-prev" class="w-12 h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="service-next" class="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center hover:bg-brand-blue-dark transition-all">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
                 </div>
                 <div id="services-grid" class="flex gap-6 overflow-x-auto pb-8 no-scrollbar scroll-animate" style="transition-delay: 200ms;">
                     <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex-shrink-0 w-80">
@@ -694,6 +694,33 @@ const firebaseConfig = {
             servicesGrid.innerHTML = '<p class="text-red-500 col-span-full text-center text-lg">Could not load services.</p>';
         }
     }
+    // Function to handle the manual arrow clicks
+function initServiceArrows() {
+    const grid = document.getElementById('services-grid');
+    const prevBtn = document.getElementById('service-prev');
+    const nextBtn = document.getElementById('service-next');
+
+    if (!grid || !prevBtn || !nextBtn) return;
+
+    // Scroll amount (Width of one card + gap)
+    const scrollAmount = 340; 
+
+    nextBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+}
+
+// Make sure to call it inside your DOMContentLoaded listener
+document.addEventListener("DOMContentLoaded", () => {
+    loadSiteContent();
+    loadServices();
+    loadFacebookPosts();
+    initServiceArrows(); // Add this line!
+});
     // Timestamp Formatter
     function formatFbTimestamp(date) {
         if (!date) return 'Just now';
